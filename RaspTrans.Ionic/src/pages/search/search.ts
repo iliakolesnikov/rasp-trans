@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { Location, Station } from '../../model';
+import { SearchLocationPage } from '../search-location/search-location';
 
 @Component({
   selector: 'page-search',
@@ -12,7 +13,10 @@ export class SearchPage {
   public locationTo: Location;
   public stationTo: Station;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public modalCtrl: ModalController) {
+  }
 
+  public searchLocationFrom() {
+    var locationModel = this.modalCtrl.create(SearchLocationPage, { title: "Откуда" });
   }
 }
