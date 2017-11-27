@@ -17,6 +17,16 @@ export class SearchPage {
   }
 
   public searchLocationFrom() {
-    var locationModel = this.modalCtrl.create(SearchLocationPage, { title: "Откуда" });
+    var locationModal = this.modalCtrl.create(SearchLocationPage, { title: "Откуда" });
+    locationModal.onDidDismiss(location => {
+      if (location) {
+        this.locationFrom = location;
+      }
+    });
+    locationModal.present();
+  }
+
+  public searchStationFrom() {
+    
   }
 }

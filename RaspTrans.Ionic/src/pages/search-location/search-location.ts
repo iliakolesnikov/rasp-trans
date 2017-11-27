@@ -1,7 +1,10 @@
-import { Component, Input, Output } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { Component, Input } from '@angular/core';
+import { ViewController, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+
 import { Location } from '../../model';
 
+import { LocationApi } from '../../services/LocationApi';
 
 @Component({
   selector: 'page-search-location',
@@ -10,17 +13,23 @@ import { Location } from '../../model';
 export class SearchLocationPage {
   @Input()
   public title: string;
-  public location: Location;
-
-  constructor(public navCtrl: ViewController) {
-
+  locations: Location[];
+  
+  constructor(
+    public navCtrl: ViewController,
+    public navParams: NavParams,
+    private locationApi: LocationApi)
+  {
+    this.title = navParams.get('title');
   }
-
-  public search() {
-
-  }
-
-  public dismiss() {
+  
+  public select(location: Location) {
     this.navCtrl.dismiss(location);
+  }
+
+  public search(term: string) {
+    this.locationApi.searchLocation(term, 30).subscribe(locations => {
+      this.locations = locations;
+    });
   }
 }

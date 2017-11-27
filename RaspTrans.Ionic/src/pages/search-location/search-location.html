@@ -1,9 +1,16 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    <div>Content goes here.</div>
-</body>
-</html>
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-input #searchTerm type="text" placeholder="Ближайшая улица, посёлок (адрес)" autofocus clearInput></ion-input>
+  <button *ngIf="searchTerm.value" ion-button block (click)="search(searchTerm.value)">Найти</button>
+  <ion-list *ngIf="locations">
+    <ion-item *ngFor="let location of locations" (click)="select(location)">
+      <p>{{location.name}}</p>
+      <small>{{location.address}}</small>
+    </ion-item>
+  </ion-list>
+</ion-content>
