@@ -1,16 +1,7 @@
 <ion-content padding>
-  <!--<p>Откуда</p>-->
-  
-
-    <!--<button ion-button full [color]="locationFrom?.name ? 'dark' : 'light'" outline>
-      {{locationFrom?.name}}
-      <span *ngIf="!locationFrom?.name">Откуда, да от верблюда, быдло епта. Fuck youself</span>
-    </button>-->
-
   <ion-input type="text" [value]="locationFrom?.name" placeholder="Откуда" [readonly]="true" (click)="searchLocationFrom()"></ion-input>
-  <ion-input type="text" [value]="stationFrom?.name" placeholder="Станция отправления" [readonly]="true"></ion-input>
+  <ion-input type="text" [value]="stationFrom?.name" placeholder="Станция отправления" [readonly]="true" (click)="searchStationFrom()"></ion-input>
   <hr/>
   <ion-input type="text" [value]="locationTo?.name" placeholder="Куда" [readonly]="true"></ion-input>
   <ion-input type="text" [value]="stationTo?.name" placeholder="Станция назначения" [readonly]="true"></ion-input>
-
 </ion-content>

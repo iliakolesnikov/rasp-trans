@@ -3,7 +3,6 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
 import { Location } from '../../model';
-
 import { LocationApi } from '../../services/LocationApi';
 
 @Component({

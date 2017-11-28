@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from 'ionic-angular';
 import { Location, Station } from '../../model';
 import { SearchLocationPage } from '../search-location/search-location';
+import { SearchStationPage } from '../search-station/search-station';
 
 @Component({
   selector: 'page-search',
@@ -21,12 +22,24 @@ export class SearchPage {
     locationModal.onDidDismiss(location => {
       if (location) {
         this.locationFrom = location;
+        this.stationFrom = null;
+        this.searchStationFrom();
       }
     });
     locationModal.present();
   }
 
   public searchStationFrom() {
-    
+    if (!this.locationFrom) {
+      this.searchLocationFrom();
+    } else {
+      var stationModal = this.modalCtrl.create(SearchStationPage, { title: "Станция отправления", location: this.locationFrom })
+      stationModal.onDidDismiss(station => {
+        if (station) {
+          this.stationFrom = station;
+        }
+      });
+      stationModal.present();
+    }
   }
 }
