@@ -6,8 +6,9 @@
 
 <ion-content>
   <ion-list *ngIf="stations">
-    <ion-item *ngFor="let station of stations">
+    <ion-item *ngFor="let station of stations" (click)="select(station)">
       <p>{{station.name}}</p>
+      <small>{{station.typeName}}</small>
     </ion-item>
   </ion-list>
 </ion-content>

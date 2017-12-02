@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 
 export class FakeLocationApi implements LocationApi  {
   locations: Location[];
+  stations: Station[];
 
   constructor() {
     this.locations = [
@@ -33,13 +34,36 @@ export class FakeLocationApi implements LocationApi  {
         }
       }
     ];
+    this.stations = [
+      {
+        name: "Царево",
+        code: "s9739286",
+        typeName: "автобусная остановка",
+        type: "bus_stop",
+        transportType: "bus"
+      },
+      {
+        name: "Школа",
+        code: "s9739285",
+        typeName: "автобусная остановка",
+        type: "bus_stop",
+        transportType: "bus"
+      },
+      {
+        name: "Автостанция",
+        code: "s9735795",
+        typeName: "автобусная остановка",
+        type: "bus_stop",
+        transportType: "bus"
+      }
+    ];
   }
 
   searchLocation(term: string, limit: number): Observable<Location[]> {
-    return of(this.locations.filter(x => x.name.toLowerCase().indexOf(term.toLowerCase()) != -1));
+    return of(this.locations.filter(x => x.name.toLowerCase().indexOf(term.toLowerCase()) !== -1));
   }
 
   searchStation(coord: GeoCoordinate, range: number): Observable<Station[]> {
-    return of([]);
+    return of(this.stations);
   }
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController } from 'ionic-angular';
-import { Location, Station } from '../../model';
-import { SearchLocationPage } from '../search-location/search-location';
-import { SearchStationPage } from '../search-station/search-station';
+import { ModalController } from "ionic-angular";
+import { Location, Station } from "../../model";
+import { SearchLocationPage } from "../search-location/search-location";
+import { SearchStationPage } from "../search-station/search-station";
 
 @Component({
   selector: 'page-search',
@@ -33,7 +33,8 @@ export class SearchPage {
     if (!this.locationFrom) {
       this.searchLocationFrom();
     } else {
-      var stationModal = this.modalCtrl.create(SearchStationPage, { title: "Станция отправления", location: this.locationFrom })
+      var stationModal =
+        this.modalCtrl.create(SearchStationPage, { title: "Станция отправления", location: this.locationFrom });
       stationModal.onDidDismiss(station => {
         if (station) {
           this.stationFrom = station;
@@ -41,5 +42,36 @@ export class SearchPage {
       });
       stationModal.present();
     }
+  }
+
+  public searchLocationTo() {
+    var locationModal = this.modalCtrl.create(SearchLocationPage, { title: "Куда" });
+    locationModal.onDidDismiss(location => {
+      if (location) {
+        this.locationTo = location;
+        this.stationTo = null;
+        this.searchStationTo();
+      }
+    });
+    locationModal.present();
+  }
+
+  public searchStationTo() {
+    if (!this.locationTo) {
+      this.searchLocationTo();
+    } else {
+      var stationModal =
+        this.modalCtrl.create(SearchStationPage, { title: "Станция прибытия", location: this.locationTo });
+      stationModal.onDidDismiss(station => {
+        if (station) {
+          this.stationTo = station;
+        }
+      });
+      stationModal.present();
+    }
+  }
+
+  public searchSchedule() {
+    
   }
 }

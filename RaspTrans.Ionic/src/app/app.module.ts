@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SearchPage } from '../pages/search/search';
 import { SearchLocationPage } from '../pages/search-location/search-location';
+import { SearchStationPage } from '../pages/search-station/search-station';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +22,8 @@ import { FakeLocationApi } from "../services/FakeApi";
     HomePage,
     ListPage,
     SearchPage,
-    SearchLocationPage
+    SearchLocationPage,
+    SearchStationPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { FakeLocationApi } from "../services/FakeApi";
     HomePage,
     ListPage,
     SearchPage,
-    SearchLocationPage
+    SearchLocationPage,
+    SearchStationPage
   ],
   providers: [
     StatusBar,

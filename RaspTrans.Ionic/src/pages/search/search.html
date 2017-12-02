@@ -2,6 +2,7 @@
   <ion-input type="text" [value]="locationFrom?.name" placeholder="Откуда" [readonly]="true" (click)="searchLocationFrom()"></ion-input>
   <ion-input type="text" [value]="stationFrom?.name" placeholder="Станция отправления" [readonly]="true" (click)="searchStationFrom()"></ion-input>
   <hr/>
-  <ion-input type="text" [value]="locationTo?.name" placeholder="Куда" [readonly]="true"></ion-input>
-  <ion-input type="text" [value]="stationTo?.name" placeholder="Станция назначения" [readonly]="true"></ion-input>
+  <ion-input type="text" [value]="locationTo?.name" placeholder="Куда" [readonly]="true" (click)="searchLocationTo()"></ion-input>
+  <ion-input type="text" [value]="stationTo?.name" placeholder="Станция прибытия" [readonly]="true" (click)="searchStationTo()"></ion-input>
+  <button *ngIf="stationFrom && stationTo" ion-button block (click)="searchSchedule()">Показать расписание</button>
 </ion-content>
