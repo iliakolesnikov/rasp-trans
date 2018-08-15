@@ -1,6 +1,7 @@
-import { Station } from "../model";
+import { SearchScheduleRequest, Schedule } from "../model";
+import { Observable } from 'rxjs/Observable';
 
 export abstract class ScheduleApi {
-  abstract search(from: Station, to: Station): Station[];
+  abstract search(request: SearchScheduleRequest): Observable<Schedule>;
 }
 

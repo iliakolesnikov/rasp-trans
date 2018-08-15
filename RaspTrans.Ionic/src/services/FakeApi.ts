@@ -1,5 +1,7 @@
-import { Location, GeoCoordinate, Station } from "../model";
+import { Location, GeoCoordinate, Station, SearchScheduleRequest, Schedule, Route, TransportType } from "../model";
+import { DateUtils } from '../utils';
 import { LocationApi } from "./LocationApi";
+import { ScheduleApi } from "./ScheduleApi";
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
@@ -40,21 +42,21 @@ export class FakeLocationApi implements LocationApi  {
         code: "s9739286",
         typeName: "автобусная остановка",
         type: "bus_stop",
-        transportType: "bus"
+        transportType: TransportType.Bus
       },
       {
         name: "Школа",
         code: "s9739285",
         typeName: "автобусная остановка",
         type: "bus_stop",
-        transportType: "bus"
+        transportType: TransportType.Bus
       },
       {
         name: "Автостанция",
         code: "s9735795",
         typeName: "автобусная остановка",
         type: "bus_stop",
-        transportType: "bus"
+        transportType: TransportType.Bus
       }
     ];
   }
@@ -65,5 +67,64 @@ export class FakeLocationApi implements LocationApi  {
 
   searchStation(coord: GeoCoordinate, range: number): Observable<Station[]> {
     return of(this.stations);
+  }
+}
+
+export class FakeScheduleApi implements ScheduleApi {
+  schedule: Schedule;
+  route21: Route;
+
+  constructor() {
+    this.route21 = {
+      name: "Пушкино (Автостанция Пушкино) — Красноармейск",
+      number: "21",
+      transportType: TransportType.Bus
+    };
+
+    this.schedule = {
+      search: {
+        from: {
+          name: "Царево",
+          code: "s9739286",
+          typeName: "автобусная остановка",
+          type: "bus_stop",
+          transportType: TransportType.Bus
+        },
+        to:
+        {
+          name: "Автостанция",
+          code: "s9735795",
+          typeName: "автобусная остановка",
+          type: "bus_stop",
+          transportType: TransportType.Bus
+        }
+      },
+      routes: [ this.route21 ],
+      segments: [
+        {
+          departure: new Date(),
+          arrival: DateUtils.dateAdd(new Date(), 'minute', 10),
+          route: this.route21
+        },
+        {
+          departure: DateUtils.dateAdd(new Date(), 'minute', 25),
+          arrival: DateUtils.dateAdd(new Date(), 'minute', 35),
+          route: this.route21
+        },
+        {
+          departure: DateUtils.dateAdd(new Date(), 'minute', 35),
+          arrival: DateUtils.dateAdd(new Date(), 'minute', 45),
+          route: this.route21
+        }
+      ]
+    };
+  }
+
+  search(request: SearchScheduleRequest): Observable<Schedule> {
+    return of(this.schedule);
+  }
+
+  static getFakeSchedule(): Schedule {
+    return new FakeScheduleApi().schedule;
   }
 }

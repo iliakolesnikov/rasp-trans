@@ -22,13 +22,20 @@ export class Station {
   code?: string;
   typeName: string;
   type: string;
-  transportType: string;
-  expressType: string;
+  transportType?: TransportType;
+  expressType?: string;
+}
+
+export enum TransportType {
+  Plane = "самолет",
+  Train = "поезд",
+  Suburban = "электричка",
+  Bus = "автобус",
+  Water = "водный транспорт"
 }
 
 export class Schedule {
-  from: Station;
-  to: Station;
+  search: SearchScheduleRequest;
   
   routes: Route[];
   segments: Segment[];
@@ -38,13 +45,20 @@ export class Route {
   code?: string;
   name: string;
   number: string;
-  transportType: string;
-  vehicle: string;
+  transportType?: TransportType;
+  vehicle?: string;
 }
 
 export class Segment {
-  arrival: Date;
   departure: Date;
+  arrival: Date;
   route: Route;
-  startDate: Date;
+  startDate?: Date;
+}
+
+export class SearchScheduleRequest {
+  from: Station;
+  to: Station;
+  transportType?: TransportType;
+  date? : Date;
 }

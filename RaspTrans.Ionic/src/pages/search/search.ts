@@ -4,6 +4,9 @@ import { Location, Station } from "../../model";
 import { SearchLocationPage } from "../search-location/search-location";
 import { SearchStationPage } from "../search-station/search-station";
 
+import { ScheduleApi } from '../../services/ScheduleApi';
+import { Observable } from 'rxjs/Observable';
+
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html'
@@ -14,7 +17,7 @@ export class SearchPage {
   public locationTo: Location;
   public stationTo: Station;
 
-  constructor(public modalCtrl: ModalController) {
+  constructor(public modalCtrl: ModalController, private scheduleApi: ScheduleApi) {
   }
 
   public searchLocationFrom() {
@@ -72,6 +75,10 @@ export class SearchPage {
   }
 
   public searchSchedule() {
-    
+    if (this.stationFrom && this.stationTo) {
+      this.scheduleApi.search({ from: this.stationFrom, to: this.stationTo, date: new Date() }).subscribe(schedule => {
+        
+      });
+    }
   }
 }
