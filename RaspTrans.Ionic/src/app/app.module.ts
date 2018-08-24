@@ -9,12 +9,14 @@ import { ListPage } from '../pages/list/list';
 import { SearchPage } from '../pages/search/search';
 import { SearchLocationPage } from '../pages/search-location/search-location';
 import { SearchStationPage } from '../pages/search-station/search-station';
+import { SchedulePage } from '../pages/schedule/schedule';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LocationApi } from "../services/LocationApi";
-import { FakeLocationApi } from "../services/FakeApi";
+import { ScheduleApi } from "../services/ScheduleApi";
+import { FakeLocationApi, FakeScheduleApi } from "../services/FakeApi";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { FakeLocationApi } from "../services/FakeApi";
     ListPage,
     SearchPage,
     SearchLocationPage,
-    SearchStationPage
+    SearchStationPage,
+    SchedulePage
   ],
   imports: [
     BrowserModule,
@@ -37,12 +40,14 @@ import { FakeLocationApi } from "../services/FakeApi";
     ListPage,
     SearchPage,
     SearchLocationPage,
-    SearchStationPage
+    SearchStationPage,
+    SchedulePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: LocationApi, useClass: FakeLocationApi},
+    { provide: LocationApi, useClass: FakeLocationApi },
+    { provide: ScheduleApi, useClass: FakeScheduleApi },
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

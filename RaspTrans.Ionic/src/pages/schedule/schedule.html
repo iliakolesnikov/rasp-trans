@@ -1,0 +1,12 @@
+<ion-content padding>
+  <div>
+    <button ion-button clear (click)="selectDate(today)" style.color="schedule.search.date != today ? 'gray' : 'inherit'">Сегодня</button>
+    <button ion-button clear (click)="selectDate(tomorrow)" style.color="schedule.search.date != today ? 'gray' : 'inherit'">Завтра</button>
+  </div>
+  <ion-list *ngIf="schedule.segments">
+    <ion-item *ngFor="let segment of schedule.segments" (click)="select(segments)">
+      <p>{{segment.departure | date:'HH:mm'}} - {{segment.arrival | date:'HH:mm'}}</p>
+      <small>{{segment.route.number}} <span *ngIf="segment.route.transportType">({{segment.route.transportType}})</span></small>
+    </ion-item>
+  </ion-list>
+</ion-content>

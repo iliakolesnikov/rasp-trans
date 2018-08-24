@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ModalController } from "ionic-angular";
+import { ModalController, NavController } from "ionic-angular";
 import { Location, Station } from "../../model";
 import { SearchLocationPage } from "../search-location/search-location";
 import { SearchStationPage } from "../search-station/search-station";
+import { SchedulePage } from "../schedule/schedule";
 
 import { ScheduleApi } from '../../services/ScheduleApi';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +18,7 @@ export class SearchPage {
   public locationTo: Location;
   public stationTo: Station;
 
-  constructor(public modalCtrl: ModalController, private scheduleApi: ScheduleApi) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private scheduleApi: ScheduleApi) {
   }
 
   public searchLocationFrom() {
@@ -77,7 +78,7 @@ export class SearchPage {
   public searchSchedule() {
     if (this.stationFrom && this.stationTo) {
       this.scheduleApi.search({ from: this.stationFrom, to: this.stationTo, date: new Date() }).subscribe(schedule => {
-        
+        this.navCtrl.push(SchedulePage, { schedule: schedule })
       });
     }
   }
