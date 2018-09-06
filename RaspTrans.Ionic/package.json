@@ -35,8 +35,5 @@
     "@ionic/app-scripts": "3.0.1",
     "typescript": "^2.4.0"
   },
-  "config": {
-    "ionic_webpack": "./config/webpack.config.js"
-  },
   "description": "A simple schedule app (bus, trains etc.)"
 }

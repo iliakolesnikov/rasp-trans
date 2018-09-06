@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { ModalController, NavController } from "ionic-angular";
-import { Location, Station } from "../../model";
+import { Storage } from '@ionic/storage';
+import { Observable } from 'rxjs/Observable';
+
+import { Location, Station, SearchScheduleRequest} from "../../model";
 import { SearchLocationPage } from "../search-location/search-location";
 import { SearchStationPage } from "../search-station/search-station";
 import { SchedulePage } from "../schedule/schedule";
 
 import { ScheduleApi } from '../../services/ScheduleApi';
-import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'page-search',
@@ -18,7 +21,21 @@ export class SearchPage {
   public locationTo: Location;
   public stationTo: Station;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private scheduleApi: ScheduleApi) {
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    private scheduleApi: ScheduleApi,
+    private storage: Storage) {
+
+    storage.get("lastSearchRequest").then(request => {
+      var lastSearchRequest = request as SearchScheduleRequest;
+      if (lastSearchRequest != null) {
+        this.locationFrom = lastSearchRequest.fromLocation;
+        this.locationTo = lastSearchRequest.toLocation;
+        this.stationFrom = lastSearchRequest.from;
+        this.stationTo = lastSearchRequest.to;
+      }
+    });
   }
 
   public searchLocationFrom() {
@@ -77,9 +94,20 @@ export class SearchPage {
 
   public searchSchedule() {
     if (this.stationFrom && this.stationTo) {
-      this.scheduleApi.search({ from: this.stationFrom, to: this.stationTo, date: new Date() }).subscribe(schedule => {
+      
+      this.scheduleApi.search(this.getSearchRequest()).subscribe(schedule => {
+        this.storage.set("lastSearchRequest", this.getSearchRequest());
         this.navCtrl.push(SchedulePage, { schedule: schedule })
       });
     }
+  }
+
+  getSearchRequest(): SearchScheduleRequest {
+    return {
+      fromLocation: this.locationFrom,
+      from: this.stationFrom,
+      toLocation: this.locationTo,
+      to: this.stationTo
+    };
   }
 }

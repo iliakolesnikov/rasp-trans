@@ -58,7 +58,9 @@ export class Segment {
 
 export class SearchScheduleRequest {
   from: Station;
+  fromLocation?: Location;
   to: Station;
+  toLocation?: Location;
   transportType?: TransportType;
   date? : Date;
 }
