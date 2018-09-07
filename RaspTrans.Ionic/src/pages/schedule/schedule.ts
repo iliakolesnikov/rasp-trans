@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Location, Station, Schedule } from "../../model";
 import * as moment from 'moment';
@@ -8,10 +8,11 @@ import * as moment from 'moment';
   templateUrl: 'schedule.html'
 })
 export class SchedulePage {
+  
   public schedule: Schedule;
 
-  constructor(navCtrl: NavController, schedule: Schedule) {
-    this.schedule = schedule;
+  constructor(navCtrl: NavController, navParams: NavParams) {
+    this.schedule = navParams.get("schedule");
   }
   
   get today(): Date {
