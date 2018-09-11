@@ -11,7 +11,8 @@ export class GeoCoordinate {
 
 export class Location {
   name: string;
-  address: string;
+  type?: string;
+  address?: string;
   coord: GeoCoordinate;
   code?: string;
 }

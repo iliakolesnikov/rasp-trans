@@ -33,7 +33,8 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.0.1",
-    "typescript": "^2.4.0"
+    "typescript": "^2.4.0",
+    "karma": "^3.0.0"
   },
   "description": "A simple schedule app (bus, trains etc.)"
 }
