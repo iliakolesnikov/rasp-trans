@@ -1,5 +1,6 @@
 {
-  "name": "RaspTrans.Ionic3",
+  "name": "rasp-trans",
   "app_id": "",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }

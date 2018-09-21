@@ -97,11 +97,12 @@
     <Content Include="**\**" Exclude="**\platforms\**;**\bin\**;**\bld\**;**\node_modules\**;**\simulation\**;.gitignore;RaspTrans.Ionic.*" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="config\**" />
+    <Content Remove="test\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="config.xml">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="config\" />
   </ItemGroup>
 </Project>
